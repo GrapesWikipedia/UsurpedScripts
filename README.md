@@ -29,20 +29,20 @@ So I have a sorta suggested procedure that I've been using. No idea whether it's
 Ideal or whatever, but it's worked so far :-). The steps I've been going through
 Are as follows.
 * Get a collection of domains that could plausibly be usurped
-* Paste those into a file called redirectsToCheck.txt
-* Run the function getNewRedirects()
-* Take the contents of the created file "allRedirects.txt" and paste them into
- a file called toCheck.txt
-* Run the function checkToCheckOnWiki()
-* Paste what that function printed out into a file called domainsOnWikiToPreProcess.txt
-* Manually check the ones in domainsThatHaveSketch.txt and domainsWhichAreLessClear.txt
-    * I've been using openTabs() to more quickly open tabs and lets me simply just glance
+* Paste those into a file called `redirectsToCheck.txt`
+* Run the function `getNewRedirects()`
+* Take the contents of the created file `allRedirects.txt` and paste them into
+ a file called `toCheck.txt`
+* Run the function `checkToCheckOnWiki()`
+* Paste what that function printed out into a file called `domainsOnWikiToPreProcess.txt`
+* Manually check the ones in `domainsThatHaveSketch.txt` and `domainsWhichAreLessClear.txt`
+    * I've been using `openTabs()` to more quickly open tabs and lets me simply just glance
     At the page to see if it's indeed usurped or not.
-* Once you have done all that, paste in the contents of toCheck.txt into alreadyChecked.txt
+* Once you have done all that, paste in the contents of `toCheck.txt` into `alreadyChecked.txt`
  Since they have, after all, now been checked.
 
 ## Dunno, a note??
-One collection of domains that could plausibly be usurped is alreadyChecked.txt, which
+One collection of domains that could plausibly be usurped is `alreadyChecked.txt`, which
 I on occasion run through the steps above and frequently the various redirect links
 Shift and I find some more domains to check. You can do that too.
 
@@ -59,4 +59,4 @@ MAX_WORKERS = 16
 MAX_CONCURRENT_REQUESTS = 100
 TIMEOUT_TIME = 60
 ```
-Which work well for my machine, but may need to be messed with for your machine. I don't have any idea how to recommend numbers, though I think the high timeout is somewhat valuable (though it can get annoying if you're checking very few domains). It will generally go faster if `MAX_WORKERS` and `MAX_CONCURRENT_REQUESTS` are bigger, but sometimes it misses redirects if those are too high, so uh, mess around with those and pick values that work well for you.
+Which work well for my machine, but may need to be messed with for your machine. I don't have any idea how to recommend numbers, though I think the high timeout is somewhat valuable (though it can get annoying if you're checking very few domains). It will generally go faster if `MAX_WORKERS` and `MAX_CONCURRENT_REQUESTS` are bigger, but sometimes it misses redirects if those are too high, so uh, mess around with those and pick values that work well for your computer.
