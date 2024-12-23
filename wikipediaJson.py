@@ -45,13 +45,6 @@ NAME_REDIRECTS_FOUND = "allRedirects.txt"
 # what tabs you want opened in Chrome
 NAME_TABS_TO_OPEN = "tabsToOpen.txt"
 
-# uh, really bad way of doing it, but it works. Basically figure out
-# what JSON response from Wikipedia corresponds to having a search that
-# fails.
-url="https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=insource:%22medicaleduca3tionfutures.org%22&utf8=&format=json&srlimit=1"
-response = requests.get(url)
-NO_RESULTS_JSON_RESP = response.json()
-
 # if Wikipedia ever has a problem with a search request, will be appended and
 # printed out.
 didntWork = []
@@ -84,7 +77,7 @@ def printIfOnWikipedia(theUrl):
         queryUrl += "\%22&utf8=&format=json&srlimit=1"
         response = requests.get(queryUrl)
         result = response.json()
-        if (result != NO_RESULTS_JSON_RESP):
+        if (result["query"]["searchinfo"]["totalhits"] != 0):
             print(":* " + theUrl)
         if response.status_code != 200:
             didntWork.append(theUrl)
