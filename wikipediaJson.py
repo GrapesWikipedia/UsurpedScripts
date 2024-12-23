@@ -55,6 +55,8 @@ didntWork = []
 MAX_WORKERS = 16
 MAX_CONCURRENT_REQUESTS = 100
 TIMEOUT_TIME = 60
+# max number of redirects for getRedirects()
+MAX_REDIRECTS = 500
 # limits the number of http requests you can have going at once
 semaphore = asyncio.Semaphore(MAX_CONCURRENT_REQUESTS)
 
@@ -175,7 +177,7 @@ async def get_redirect_url(session, url):
         try:
             # session.head rather than session.get since we don't actually care
             # about the content
-            async with session.head(url, allow_redirects=True, timeout = TIMEOUT_TIME) as response:
+            async with session.head(url, allow_redirects=True, timeout = TIMEOUT_TIME, max_redirects = MAX_REDIRECTS) as response:
                 return [str(resp.url) for resp in response.history] + [str(response.url)]
         except Exception as e: # if exception, who cares
             return []
