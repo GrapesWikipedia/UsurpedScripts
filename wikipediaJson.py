@@ -223,7 +223,10 @@ def getNewRedirects():
 # opens the tabs in NAME_TABS_TO_OPEN in Chrome
 def openTabs():
     path = webbrowser.get("open -a /Applications/Google\ Chrome.app %s")
-    domains = getDomainsFromFile(NAME_TABS_TO_OPEN)
+    # want to preserve order
+    with open(NAME_TABS_TO_OPEN_FILE, 'r') as file:
+        domains = extract_domains(file.read())
+        domains = [domain.lower() for domain in domains] # make it all lowercase
     # add prefix
     domainsWithHttps = ["https://" + domain for domain in domains]
     [path.open(url) for url in domainsWithHttps]
